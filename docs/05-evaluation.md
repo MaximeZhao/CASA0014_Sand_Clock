@@ -17,16 +17,15 @@ Do not mark a test passed merely because the sketch compiled or an illustration 
 
 ## Final acceptance sheet (fill after testing)
 
-| Test action | Expected result | Actual result | Pass/fail | Evidence |
-|---|---|---|---|---|
-| Start face-up | Flow begins | | | |
-| Start face-down | Opposite flow begins | | | |
-| Flip10times with pauses | Correct direction, minimal false shake | | | |
-| Light hand jitter | No disruptive shake animation | | | |
-| Deliberate horizontal shake | Obvious disturbance, no timer reset | | | |
-| Tap, wait5s, tap again | Frame/time freeze then resume | | | |
-| Hold touch3s | One toggle only | | | |
-| Full uninterrupted transfer | Approximately30s, then breathing | | | |
-| USB through enclosure opening | No cable strain or loose connectors | | | |
+| Test action | Expected result | Actual result | Pass/fail | 
+|---|---|---|---|
+| Start face-up | Flow begins | | pass| 
+| Start face-down | Opposite flow begins | |pass | 
+| Flip10times with pauses | Correct direction, minimal false shake | |pass | 
+| Light hand jitter | No disruptive shake animation | need improvement | | 
+| Deliberate horizontal shake | Obvious disturbance, no timer reset | |fail | 
+| Tap, wait5s, tap again | Frame/time freeze then resume | |pass | 
+| Hold touch3s | One toggle only | | pass| 
+| Full uninterrupted transfer | Approximately30s, then breathing | | pass| 
+| USB through enclosure opening | No cable strain or loose connectors | |pass | 
 
-Record the firmware commit, Wi-Fi conditions, mounting orientation and how the controller was held. Save short videos or log excerpts, without credentials.
