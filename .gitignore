@@ -1,0 +1,4 @@
+# Local credentials and generated artifacts
+**/arduino_secrets.h
+.DS_Store
+build/

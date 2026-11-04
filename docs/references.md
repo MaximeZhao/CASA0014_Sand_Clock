@@ -9,4 +9,4 @@
 
 Add the exact course starter-code source, lecture/readings and any adapted code attribution. Retain original source headers and licences in copied code. A project-wide licence has not been selected automatically.
 
-See [AI usage disclosure](../AI_USAGE.md).
+See [AI usage disclosure](../AI_USAGE%2004.47.35.md).

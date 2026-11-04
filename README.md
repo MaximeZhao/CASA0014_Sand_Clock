@@ -8,6 +8,8 @@ A medium-fidelity Arduino controller for a networked light-hourglass display. Mo
 |---|---|
 | Run the current device |[SandClock_WideFlow](SandClock_WideFlow/SandClock_WideFlow.ino) and [build guide](Project_Documentation.md#software-setup)|
 | Understand the design journey |[12-stage iteration journal](Development%20Iterations.docx)|
+| Run the offline two-sensor test |[Two_Sensors_Test](sand_clock/Two_Sensors_Test/Two_Sensors_Test.ino)|
+| Browse earlier code |[Earlier sketches and diagnostics](sand_clock/README.md)|
 | Reproduce the circuit |[Bill of materials](hardware/BOM.md) and [wiring](hardware/wiring.md)|
 | Understand the IoT system |[Architecture](Project_Documentation.md#system-architecture)|
 | Read the controls |[Interaction rules](Project_Documentation.md#using-the-hourglass)|
@@ -31,6 +33,8 @@ The cardboard and transparent-sheet construction, confirmed measurements and rem
 ## Structure
 
 ```text
+SandClock_WideFlow/ integrated application
+sand_clock/ earlier sketches and diagnostics
 Development Iterations.docx chronological development, problems and improvements
 hardware/     parts and actual wiring
 enclosure/    construction decisions and measurements

@@ -11,6 +11,6 @@
 | Grove Touch |SIG|D2|
 | Grove Touch |NC|Unconnected|
 
-The sensors share separate3.3V and ground rails. Check split rails and printed labels. Disconnect USB before moving wires. The existing MKR/breadboard assembly is retained. Keep the independently fixed accelerometer in the orientation tested by the code.
+The sensors share separate 3.3 V and ground rails. Check split rails and printed labels. Disconnect USB before moving wires. The existing MKR/breadboard assembly is retained. Keep the independently fixed accelerometer in the orientation tested by the code.
 
-Use the [offline diagnostic](../firmware/diagnostics/Two_Sensors_Test/) to isolate hardware inputs from networking. Expected MMA7660 I2C address is0x4C. Physical touch ON/OFF is converted into a pause toggle by the current main sketch.
+Use the [offline diagnostic](../sand_clock/Two_Sensors_Test/) to isolate hardware inputs from networking. Expected MMA7660 I2C address is 0x4C. Physical touch ON/OFF is converted into a pause toggle by the current main sketch.

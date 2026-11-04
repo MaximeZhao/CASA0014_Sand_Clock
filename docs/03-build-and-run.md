@@ -3,14 +3,14 @@
 1. Use the [BOM](../hardware/BOM.md) and [current wiring](../hardware/wiring.md).
 2. In Arduino IDE, install **Arduino SAMD Boards** and select **Arduino MKR WiFi1010**, plus the correct USB serial port.
 3. Install **WiFiNINA**, **PubSubClient**, and Seeed Studio's **Accelerometer_MMA7660** library.
-4. First run `firmware/diagnostics/Two_Sensors_Test/Two_Sensors_Test.ino` with Serial Monitor115200. Check accelerometer readings and touch ON/OFF.
-5. Open `firmware/current/SandClock_WideFlow/SandClock_WideFlow.ino` as a separate sketch.
-6. Copy its `arduino_secrets.example.h` to `arduino_secrets.h` in that SAME folder, enter your local network and MQTT credentials, and do not upload that file to GitHub.
+4. First run `sand_clock/Two_Sensors_Test/Two_Sensors_Test.ino` with Serial Monitor at 115200 baud. Check accelerometer readings and touch ON/OFF.
+5. Open `SandClock_WideFlow/SandClock_WideFlow.ino` as a separate sketch.
+6. Copy `SandClock_WideFlow/arduino_secrets.example.h` to `arduino_secrets.h` in that SAME folder, enter your local network and MQTT credentials, and do not upload that file to GitHub.
 7. Check the assigned MQTT topic; the development snapshot uses channel29. Connect to a compatible2.4GHz Wi-Fi network.
-8. Upload, select Serial Monitor115200, wait for Wi-Fi/MQTT connection, select the matching receiver channel, and hold a face steady to start.
+8. Upload, select Serial Monitor at 115200 baud, wait for Wi-Fi/MQTT connection, select the matching receiver channel, and hold a face steady to start.
 9. Test on the actual classroom light as well as the web simulator. A simulator test is not proof of physical mapping.
 
-Current source is a preserved compiled development snapshot; library versions were not recorded, so do not claim a fully pinned environment. Record IDE, board package and library versions from the final reproducibility test.
+The main application is in `SandClock_WideFlow`; older sketches and diagnostics are indexed in [sand_clock](../sand_clock/README.md).
 
 ## Troubleshooting
 - No USB port: disconnect power, remove external wiring, test bare board with known data cable, then restore circuits in stages.

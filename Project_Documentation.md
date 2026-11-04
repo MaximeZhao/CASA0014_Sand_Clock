@@ -63,15 +63,23 @@ The accelerometer has a measurement range of approximately ±1.5 g. Strong movem
 
 Further details are provided in the [bill of materials](hardware/BOM.md) and [wiring guide](hardware/wiring.md).
 
+## Code Layout
+
+- `SandClock_WideFlow/SandClock_WideFlow.ino`: integrated application.
+- `sand_clock/Two_Sensors_Test/Two_Sensors_Test.ino`: offline accelerometer and touch test.
+- `sand_clock/`: earlier tilt, timing, accelerometer, MQTT and colour-flow sketches; see the [sketch index](sand_clock/README.md).
+
+The earlier SandClock_Ready source is retained once as `sand_clock/Vespera_Mapping_Test/Vespera_Mapping_Test.ino`. Each sketch is opened separately in Arduino IDE.
+
 ## Software Setup
 
 1. Install Arduino IDE and the **Arduino SAMD Boards** package.
 2. Select **Arduino MKR WiFi 1010** and the board's USB serial port.
 3. Install **WiFiNINA**, **PubSubClient** and Seeed Studio's **Accelerometer_MMA7660** library.
-4. For an independent accelerometer check, open `sand_clock/MMA7660FC_Demo/MMA7660FC_Demo.ino` and upload it.
-5. Use the baud rate specified by that diagnostic sketch and check that X, Y and Z change when the sensor is moved. The main sketch below provides the combined interaction.
+4. Open `sand_clock/Two_Sensors_Test/Two_Sensors_Test.ino` and upload it to test both sensors before using the full application.
+5. Open the Serial Monitor at **115200 baud**. Check that X, Y and Z change when the sensor is moved and that the touch pad produces ON/OFF events. This diagnostic works without Wi-Fi.
 6. Open `SandClock_WideFlow/SandClock_WideFlow.ino` as a separate sketch.
-7. Create or configure `arduino_secrets.h` beside the main `.ino`, using the credential macro names referenced by that sketch. Enter the local Wi-Fi and MQTT credentials and keep the configured values private.
+7. Copy `SandClock_WideFlow/arduino_secrets.example.h` to `arduino_secrets.h` in the same folder. Enter the local Wi-Fi and MQTT credentials. The local configuration is ignored by Git.
 8. Connect to a compatible **2.4 GHz Wi-Fi** network and check that the configured MQTT topic matches the intended receiver.
 9. Upload the main sketch and open the Serial Monitor at **115200 baud**. Wait for the Wi-Fi and MQTT connection messages.
 10. Select the matching channel in the web simulator and hold one orientation steady to begin the transfer.
