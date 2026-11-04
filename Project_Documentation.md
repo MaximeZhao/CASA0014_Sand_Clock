@@ -6,7 +6,7 @@ Light Sand is a physical controller that uses the action of an hourglass to cont
 
 The controller uses an Arduino MKR WiFi 1010, an MMA7660 accelerometer and a Grove Touch v1.1 module. It sends RGB frames through Wi-Fi and MQTT. The light animation appears on the receiving display, while the handheld object provides the interaction.
 
-The current prototype retains a breadboard and uses USB power. Its enclosure is made from cardboard and transparent sheet material. The development process is described in [Development Iterations](iterations.md).
+The current prototype retains a breadboard and uses USB power. Its enclosure is made from cardboard and transparent sheet material. The development process is described in [Development Iterations](Development%20Iterations.docx).
 
 ## System Architecture
 
@@ -68,10 +68,10 @@ Further details are provided in the [bill of materials](hardware/BOM.md) and [wi
 1. Install Arduino IDE and the **Arduino SAMD Boards** package.
 2. Select **Arduino MKR WiFi 1010** and the board's USB serial port.
 3. Install **WiFiNINA**, **PubSubClient** and Seeed Studio's **Accelerometer_MMA7660** library.
-4. Open `firmware/diagnostics/Two_Sensors_Test/Two_Sensors_Test.ino` and upload it.
-5. Open the Serial Monitor at **115200 baud**. Check that X, Y and Z change when the sensor is moved and that touching the pad produces ON/OFF events.
-6. Open `firmware/current/SandClock_WideFlow/SandClock_WideFlow.ino` as a separate sketch.
-7. Copy `arduino_secrets.example.h` to `arduino_secrets.h` in the same sketch folder. Enter the local Wi-Fi and MQTT credentials. Keep this configured file out of the public repository.
+4. For an independent accelerometer check, open `sand_clock/MMA7660FC_Demo/MMA7660FC_Demo.ino` and upload it.
+5. Use the baud rate specified by that diagnostic sketch and check that X, Y and Z change when the sensor is moved. The main sketch below provides the combined interaction.
+6. Open `SandClock_WideFlow/SandClock_WideFlow.ino` as a separate sketch.
+7. Create or configure `arduino_secrets.h` beside the main `.ino`, using the credential macro names referenced by that sketch. Enter the local Wi-Fi and MQTT credentials and keep the configured values private.
 8. Connect to a compatible **2.4 GHz Wi-Fi** network and check that the configured MQTT topic matches the intended receiver.
 9. Upload the main sketch and open the Serial Monitor at **115200 baud**. Wait for the Wi-Fi and MQTT connection messages.
 10. Select the matching channel in the web simulator and hold one orientation steady to begin the transfer.
@@ -138,38 +138,58 @@ Pausing stops the progress of the transfer. Network reconnection also currently 
 
 ## Evaluation and Limitations
 
-| Function | Development observation | Current status |
+The owner's latest acceptance record contains eight passed checks and one area needing improvement. Deliberate horizontal shaking was confirmed as PASS on 4 November 2026.
+
+| Test action | Expected result | Recorded result |
 |---|---|---|
-| Three-axis acceleration | Static and moving values were received | Demonstrated |
-| Touch with acceleration readings | ON/OFF events appeared while acceleration continued updating | Demonstrated |
-| MQTT to web display | LED 0 and subsequent animation patterns appeared | Demonstrated |
-| Pausing the countdown | Earlier logs held the remaining time at 9.8 and 4.0 seconds | Demonstrated in the hold-to-freeze version |
-| Resuming while tilted | An earlier version remained in WAIT_POSE; the logic was revised | Latest combined hardware check outstanding |
-| One toggle per tap | Press-event software testing and compilation completed | Final enclosure test outstanding |
-| Distinguishing flip from shake | Sensitivity improved during iteration, but false disturbances were also reported | Further reliability testing needed |
-| Automatic breathing at completion | Implemented in the compiled program | Final recorded display test outstanding |
-| Enclosure fit | Assembly photographs show the construction process | Final fit and access checks outstanding |
-| Physical Vespera mapping | Web numbering established | Physical mapping check outstanding |
+| Start face-up | Flow begins | PASS |
+| Start face-down | Opposite flow begins | PASS |
+| Flip 10 times with pauses | Correct direction with minimal false shake | PASS |
+| Light hand jitter | No disruptive shake animation | NEEDS IMPROVEMENT |
+| Deliberate horizontal shaking | Visible disturbance without resetting the timer | PASS |
+| Tap, wait 5 seconds, then tap again | Frame and countdown freeze, then resume | PASS |
+| Hold touch for 3 seconds | One toggle only | PASS |
+| Full uninterrupted transfer | Approximately 30 seconds, then breathing | PASS |
+| USB cable through the enclosure opening | No cable strain or loose connectors | PASS |
 
-The next combined test needs to cover repeated flips, small hand movements, deliberate shaking, pausing for several seconds, resuming and a complete uninterrupted transfer. It also needs to check that a sustained touch causes only one toggle and that the USB cable and sensor connections remain secure inside the shell.
+Light hand jitter remains the main interaction issue. Passing deliberate shaking does not mean all small unintended movements are rejected. The accelerometer's limited range, the display's low resolution and blocking network reconnection also remain practical limitations.
 
-The main limitations are the accelerometer's small measurement range, the low display resolution and blocking network reconnection. Sensor mounting and the way the controller is held also influence gesture recognition.
+The acceptance sheet records qualitative results. A measured timing error, false-trigger rate and final demonstration recording have not yet been included.
 
 ## Enclosure and Power
 
-The MKR WiFi 1010 remains fixed to an 82 × 55 mm breadboard. The shell must accommodate the connected assembly, including the height of jumper connectors, Grove plugs and wire loops.
+The enclosure uses cardboard and transparent sheet material. The MKR WiFi 1010 remains mounted on an 82 × 55 mm breadboard. The owner confirmed the following dimensions on 4 November 2026:
 
-The construction explored a sloped support and two side panels closing over an existing base. A downward-facing USB connection interfered with standing the object on its end, so a side exit was considered by rotating the complete breadboard assembly while keeping the separately mounted accelerometer fixed relative to the shell.
+| Part | Confirmed size |
+|---|---|
+| Overall enclosure height | 24.5 cm (245 mm) |
+| Reported overall enclosure width | 8.5 cm (85 mm) |
+| Central rectangle on the front face | 6 cm wide × 5 cm high (60 × 50 mm) |
+| Central rectangle on the back face | 6 cm wide × 5 cm high (60 × 50 mm) |
+| Breadboard footprint | 8.2 × 5.5 cm (82 × 55 mm) |
 
-The current build uses USB power because the available battery connectors did not fit the board. Final measurements, panel closure, grip comfort, touch access and cable clearance remain part of the physical evaluation. Construction details are collected in the [enclosure documentation](enclosure/README.md).
+Both front and back central rectangles retained the 6 × 5 cm design. The final depth, complete remaining panel outlines and measured USB/touch openings still need to be recorded before the model can be reproduced from a full cutting plan.
+
+The prototype uses USB power. Its fitted USB cable arrangement was marked PASS in the acceptance sheet. The construction explored a sloped board support and two side panels closing over the existing base. Further construction details are in the [enclosure documentation](enclosure/README.md).
 
 ## What I Learned and Next Steps
 
-The development showed me that adding more effects does not automatically make an interaction better. A stricter movement threshold could reduce false triggers but also make the controller feel unresponsive. I needed to consider flipping and shaking together rather than tuning each one in isolation.
+The development showed me that more effects do not automatically make the interaction better. I had to balance responsiveness with accidental triggering and consider flipping and shaking together. The latest results mark both deliberate actions as passed, while small hand movements still need better filtering.
 
-Testing the sensors separately helped me distinguish a wiring problem from a problem in the animation or network connection. The touch interaction also showed how a small change in the intended action—from holding to tapping—required a corresponding change in the program's state logic.
+Separate sensor tests helped me distinguish wiring problems from animation or network problems. Changing touch from holding to tapping also showed how the intended physical action needed to match the program's state logic.
 
-Building the shell made the physical constraints clearer. The enclosure had to fit the real cables and connectors, and the sensor needed to stay secure while the object moved. The remaining work is to complete the combined tests, record the final enclosure dimensions, verify the actual classroom light mapping and investigate nonblocking networking if reconnection delays continue to affect the interaction.
+Building the shell made the real constraints clearer: the connected components, cable bends and USB plug had to fit inside it. The overall height, width and central rectangles are now recorded, so they are no longer missing measurements.
+
+## Remaining Verification and Documentation
+
+- **[TO IMPROVE] Light hand jitter:** small unintended movements still need better rejection. Record these movements, adjust the motion filter if necessary and retest deliberate shaking and flipping together.
+- **[TO COMPLETE] Final panel plan:** overall height, overall width and both central rectangles are recorded. Overall depth, the remaining panel dimensions and measured USB/touch opening sizes still need to be added to complete the cutting plan.
+- **[TO VERIFY] Physical Vespera mapping:** confirm which physical LED positions correspond to the web-grid numbering and record the actual classroom-light response.
+- **[TO ADD] Final demonstration and measured limitations:** add a short real-device video and record timing deviation and remaining gesture-detection limitations. The current acceptance sheet contains pass/fail results rather than these quantitative measurements.
+
+## Future Improvement
+
+Nonblocking Wi-Fi/MQTT reconnection is a future software improvement. The current program can pause normal interaction during reconnection. This change has not been implemented, and it is separate from the completed interaction tests.
 
 ## References and Acknowledgements
 
@@ -179,4 +199,4 @@ Building the shell made the physical constraints clearer. The enclosure had to f
 - [Seeed MMA7660 library](https://github.com/Seeed-Studio/Accelerometer_MMA7660)
 - [Seeed Grove Touch documentation](https://wiki.seeedstudio.com/Grove-Touch_Sensor/)
 - [GitHub file-upload guidance](https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository)
-- [AI assistance disclosure](AI_USAGE.md)
+- [AI assistance disclosure](AI_USAGE%2004.47.35.md)

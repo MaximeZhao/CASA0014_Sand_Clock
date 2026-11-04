@@ -6,20 +6,18 @@ A medium-fidelity Arduino controller for a networked light-hourglass display. Mo
 
 | Goal | Entry |
 |---|---|
-| Run the current device |[SandClock_WideFlow](SandClock_WideFlow/SandClock_WideFlow.ino/) and [build guide](Project_Documentation.md#software-setup)|
-| Understand the design journey |[12-stage iteration journal](Development Iterations.docx)|
+| Run the current device |[SandClock_WideFlow](SandClock_WideFlow/SandClock_WideFlow.ino) and [build guide](Project_Documentation.md#software-setup)|
+| Understand the design journey |[12-stage iteration journal](Development%20Iterations.docx)|
 | Reproduce the circuit |[Bill of materials](hardware/BOM.md) and [wiring](hardware/wiring.md)|
 | Understand the IoT system |[Architecture](Project_Documentation.md#system-architecture)|
 | Read the controls |[Interaction rules](Project_Documentation.md#using-the-hourglass)|
 | Check what was actually tested |[Evaluation](Project_Documentation.md#evaluation-and-limitations)|
 | Build or review the enclosure |[Enclosure](enclosure/README.md)|
-| Review sources and AI assistance |[References](Project_Documentation.md#references-and-acknowledgements), [AI usage](AI_USAGE.md)|
+| Review sources and AI assistance |[References](Project_Documentation.md#references-and-acknowledgements), [AI usage](AI_USAGE%2004.47.35.md)|
 
 ## Prototype under construction
 
-![Actual cardboard assembly](media/photos/cardboard-assembly.jpg)
-
-This is an actual in-progress photograph, not a final rendered product or proof of the latest firmware's full acceptance.
+The cardboard and transparent-sheet construction, confirmed measurements and remaining panel details are described in the [enclosure documentation](enclosure/README.md).
 
 ## Current behaviour
 
@@ -36,18 +34,17 @@ This is an actual in-progress photograph, not a final rendered product or proof 
 Development Iterations.docx chronological development, problems and improvements
 hardware/     parts and actual wiring
 enclosure/    construction decisions and measurements
-media/        photos, screenshots, concepts and demo links
 Project_Documentation.md architecture, setup, operation, tests and reflection
 ```
 
 ## Evidence and scope
 
-The current sketch compiled for MKR WiFi1010 during development. Sensor logs and web-grid behaviour were demonstrated in earlier stages. The latest full hardware acceptance, final enclosure fit and Vespera physical mapping still require their own recorded tests. See the evaluation table instead of assuming all functions passed.
+The latest owner-reported acceptance sheet records eight passed checks, including deliberate horizontal shaking, and one improvement item: light hand jitter. Enclosure measurements are 24.5 cm high and 8.5 cm wide, with a 6 × 5 cm central rectangle on each face. The full panel plan, physical Vespera mapping and final demonstration evidence still need completion. See the [evaluation](Project_Documentation.md#evaluation-and-limitations).
 
 ## Configuration
 
-Real `arduino_secrets.h` files are excluded. Copy the supplied example inside the CURRENT sketch folder and fill it locally. The browser upload workflow requires manual checking too; `.gitignore` does not protect a secret deliberately selected for upload.
+Configure the credential macros required by the main sketch in a local `arduino_secrets.h` beside the `.ino` file. Keep private Wi-Fi and MQTT credential values out of public uploads.
 
 ## Development and course readiness
 
-See [CHANGELOG](CHANGELOG.md), [readiness checklist](ASSESSMENT_CHECKLIST.md) and [iteration template](templates/iteration-template.md). The reflective blog is a separate submission, not a copy of the build journal.
+See [Project Documentation](Project_Documentation.md) for setup, controls, reported test results and outstanding verification. [Development Iterations](Development%20Iterations.docx) records the design process. The reflective blog is a separate submission.
