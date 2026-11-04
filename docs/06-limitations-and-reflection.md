@@ -21,8 +21,7 @@ Making the enclosure showed why I needed to work with the actual connected hardw
 ## Remaining Work
 
 - **[TO IMPROVE] Light hand jitter:** small unintended movements still need better rejection. Record these movements, adjust the motion filter if necessary and retest deliberate shaking and flipping together.
-- **[TO COMPLETE] Final panel plan:** overall height, overall width and both central rectangles are recorded. Overall depth, the remaining panel dimensions and measured USB/touch opening sizes still need to be added to complete the cutting plan.
-- **[TO VERIFY] Physical Vespera mapping:** confirm which physical LED positions correspond to the web-grid numbering and record the actual classroom-light response.
+
 - **[TO ADD] Final demonstration and measured limitations:** add a short real-device video and record timing deviation and remaining gesture-detection limitations. The current acceptance sheet contains pass/fail results rather than these quantitative measurements.
 
 ## Future Software Improvement
